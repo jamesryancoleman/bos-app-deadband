@@ -6,12 +6,12 @@ A heating control app that runs a deadband thermostat loop. It runs continuously
 
 ### Required environment variables (BOS point addresses)
 
-| Variable | Description |
-|---|---|
-| `ZONE_TEMP_PT` | BOS point address for the zone temperature sensor (read) |
-| `SETPOINT_PT` | BOS point address for the temperature setpoint (read) |
-| `HEATER_ON_PT` | BOS point address for the heater on/off command (write) |
-| `FAN_SPD_CMD_PT` | BOS point address for the fan speed command (write) |
+| Variable | Label | Usage | Placeholder | Preferred Class | Accept Class |
+|---|---|---|---|---|---|
+| `ZONE_TEMP_PT` | Zone Temperature Sensor | The current temperature of the space (read) | `bos://localhost/dev/1/pts/1` | `brick:Zone_Air_Temperature_Sensor` | `brick:Temperature_Sensor` |
+| `SETPOINT_PT` | Heating Setpoint | The target temperature of the space (read) | `bos://localhost/dev/1/pts/2` | `brick:Air_Temperature_Setpoint` | `brick:Temperature_Setpoint` |
+| `HEATER_ON_PT` | Heater On Command | The on/off heater to control (write) | `bos://localhost/dev/1/pts/3` | `brick:On_Command` | `brick:On_Off_Command` |
+| `FAN_SPD_CMD_PT` | Fan Speed Command | A fan to turn on with the heating (write) | `bos://localhost/dev/1/pts/4` | `brick:Fan_Speed_Command` | `brick:Fan_Command` |
 
 ### Shared memory (BOS store, optional)
 
