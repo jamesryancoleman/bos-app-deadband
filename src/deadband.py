@@ -34,7 +34,10 @@ if __name__ == "__main__":
     bos.store(heater_cycles_key, heater_cycles)
     
     heater_is_on = False 
-    bos.set(heater_on, heater_is_on) 
+    if heater_is_on:
+        bos.set(heater_on, 1)
+    else: 
+        bos.set(heater_on, 0)
     bos.set(fan_spd_cmd, 0) 
     while True:
         # update deadbands independently — failure keeps last known values
@@ -55,12 +58,18 @@ if __name__ == "__main__":
             now = datetime.datetime.now(_tz)
             if (current_temp <= (current_setpoint - lower_deadband)) and not heater_is_on:
                 heater_is_on = True
-                bos.set(heater_on, heater_is_on)
+                if heater_is_on:
+                    bos.set(heater_on, 1)
+                else: 
+                    bos.set(heater_on, 0)
                 bos.set(fan_spd_cmd, 2.1)
                 print(f"heater_is_on={heater_is_on} @ {now}")
             elif (current_temp > (current_setpoint + upper_deadband)) and heater_is_on:
                 heater_is_on = False
-                bos.set(heater_on, heater_is_on)
+                if heater_is_on:
+                    bos.set(heater_on, 1)
+                else: 
+                    bos.set(heater_on, 0)
                 bos.set(fan_spd_cmd, 0)
                 print(f"heater_is_on={heater_is_on} @ {now}")
 
